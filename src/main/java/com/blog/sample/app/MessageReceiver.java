@@ -21,10 +21,10 @@ public class MessageReceiver {
 
 	// @JmsListener(destination = "TestQueue", containerFactory =
 	// "jmsContainerFactory")
-	public SimpleMessage retrieveMessage() {
+	public String retrieveMessage() {
 
-		SimpleMessage simpleMessage = (SimpleMessage) jmsTemplate.receiveAndConvert("TestQueue");
-		log.info("Retrieved message from queue: " + simpleMessage.toString());
-		return simpleMessage;
+		String message = (String) jmsTemplate.receiveAndConvert("TestQueue");
+		log.info("Retrieved message from queue: " + message);
+		return message;
 	}
 }

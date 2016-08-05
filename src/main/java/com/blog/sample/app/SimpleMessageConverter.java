@@ -15,9 +15,9 @@ public class SimpleMessageConverter implements MessageConverter {
 	@Override
 	public Message toMessage(Object messageObject, Session session) throws JMSException, MessageConversionException {
 
-		String messageString = (String) messageObject;
+		SimpleMessage simpleMessage = (SimpleMessage) messageObject;
 		MapMessage message = session.createMapMessage();
-		message.setString("message", messageString);
+		message.setString("message", simpleMessage.toString());
 		return message;
 	}
 

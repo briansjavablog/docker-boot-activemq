@@ -21,7 +21,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value = "/message/", method = RequestMethod.GET)
-	public SimpleMessage retrieveMessage() {
+	public String retrieveMessage() {
 	
 		return messageReceiver.retrieveMessage();
 	}
