@@ -9,7 +9,10 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class MessageSender {
 
 	private final JmsTemplate jmsTemplate;
@@ -19,17 +22,17 @@ public class MessageSender {
 		this.jmsTemplate = jmsTemplate;
 	}
 
-	public void publishMessage(final String message){
+	public void publishMessage(SimpleMessage simpleMessage){
 		
-		MessageCreator messageCreator = new MessageCreator() {
+		/*MessageCreator messageCreator = new MessageCreator() {
            // @Override
             public Message createMessage(Session session) throws JMSException {
-                return session.createTextMessage(message);
+                return session.createTextMessage(simpleMessage);
             }
-        };
+        };*/
         
-        System.out.println("Sending a new message.");
-        jmsTemplate.send("TestQueue", messageCreator);
+        log.info("Sending message to queue: " + simpleMessage.toString());
+        jmsTemplate.convertAndSend(simpleMessage);
 	}
 	
 }

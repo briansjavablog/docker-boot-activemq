@@ -1,28 +1,36 @@
 package com.blog.sample.app;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class MessageController {
 
+	private final MessageSender messageSender;
+	private final MessageReceiver messageReceiver;
+
 	@Autowired
-	private MessageSender messageSender;
+	public MessageController(MessageSender messageSender, MessageReceiver messageReceiver){
+		this.messageSender = messageSender;
+		this.messageReceiver = messageReceiver;
+	}
 	
 	@RequestMapping(value = "/message/", method = RequestMethod.GET)
-	public String retrieveMessage() {
+	public SimpleMessage retrieveMessage() {
 	
-		return "testMessage";
+		return messageReceiver.retrieveMessage();
 	}
 		
 	@RequestMapping(value = { "/message" }, method = { RequestMethod.POST })
 	public void publishMessage(@RequestBody String message) {
 
-		messageSender.publishMessage(message);
+		SimpleMessage simpleMessage = new SimpleMessage(message, new Date());
+		messageSender.publishMessage(simpleMessage);
 	}
 
 }

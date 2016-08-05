@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class MessageReceiver {
 
 	private final JmsTemplate jmsTemplate;
@@ -16,10 +19,10 @@ public class MessageReceiver {
 
 	// @JmsListener(destination = "TestQueue", containerFactory =
 	// "jmsContainerFactory")
-	public String retrieveMessage() {
+	public SimpleMessage retrieveMessage() {
 
-		String message = (String) jmsTemplate.receiveAndConvert("TestQueue");
-		System.out.println("Received [" + message + "]");
-		return message;
+		SimpleMessage simpleMessage = (SimpleMessage) jmsTemplate.receiveAndConvert("TestQueue");
+		log.info("Retrieved message from queue: " + simpleMessage.toString());
+		return simpleMessage;
 	}
 }
