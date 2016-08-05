@@ -19,8 +19,6 @@ public class MessageReceiver {
 		this.jmsTemplate.setMessageConverter(messageConverter);
 	}
 
-	// @JmsListener(destination = "TestQueue", containerFactory =
-	// "jmsContainerFactory")
 	public String retrieveMessage() {
 
 		String message = (String) jmsTemplate.receiveAndConvert("TestQueue");
