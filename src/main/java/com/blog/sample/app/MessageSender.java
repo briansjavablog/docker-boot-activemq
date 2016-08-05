@@ -32,7 +32,7 @@ public class MessageSender {
         };*/
         
         log.info("Sending message to queue: " + simpleMessage.toString());
-        jmsTemplate.convertAndSend(simpleMessage);
+        jmsTemplate.convertAndSend("TestQueue", simpleMessage);
 	}
 	
 }
