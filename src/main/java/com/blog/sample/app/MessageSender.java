@@ -7,6 +7,7 @@ import javax.jms.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +19,9 @@ public class MessageSender {
 	private final JmsTemplate jmsTemplate;
 
 	@Autowired
-	public MessageSender(JmsTemplate jmsTemplate) {
+	public MessageSender(JmsTemplate jmsTemplate, MessageConverter messageConverter) {
 		this.jmsTemplate = jmsTemplate;
+		this.jmsTemplate.setMessageConverter(messageConverter);		
 	}
 
 	public void publishMessage(SimpleMessage simpleMessage){
