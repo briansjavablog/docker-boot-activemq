@@ -1,4 +1,4 @@
-package com.blog.sample.app;
+package com.blog.sample.app.mq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
@@ -22,7 +22,7 @@ public class MessageReceiver {
 	public String retrieveMessage() {
 
 		String message = (String) jmsTemplate.receiveAndConvert("TestQueue");
-		log.info("Retrieved message from queue: " + message);
+		log.info("Retrieved message from queue: {}", message);
 		return message;
 	}
 }

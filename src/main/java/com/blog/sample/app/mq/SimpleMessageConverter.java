@@ -1,4 +1,4 @@
-package com.blog.sample.app;
+package com.blog.sample.app.mq;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -8,6 +8,8 @@ import javax.jms.Session;
 import org.springframework.jms.support.converter.MessageConversionException;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
+
+import com.blog.sample.app.model.SimpleMessage;
 
 @Component
 public class SimpleMessageConverter implements MessageConverter {

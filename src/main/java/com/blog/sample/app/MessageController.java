@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blog.sample.app.model.SimpleMessage;
+import com.blog.sample.app.mq.MessageReceiver;
+import com.blog.sample.app.mq.MessageSender;
+
 @RestController
 public class MessageController {
 
